@@ -1,0 +1,13 @@
+
+# Created by https://www.toptal.com/developers/gitignore/api/hugo
+# Edit at https://www.toptal.com/developers/gitignore?templates=hugo
+
+### Hugo ###
+# Generated files by hugo
+/resources/_gen/
+hugo_stats.json
+*.rds
+*.Rmd
+*.rmd
+
+# End of https://www.toptal.com/developers/gitignore/api/hugo

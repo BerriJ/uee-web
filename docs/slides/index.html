@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#4f4f4f">
+	<meta name="msapplication-TileColor" content="#4f4f4f">
+<meta itemprop="name" content="Research">
+<meta itemprop="description" content="An Introduction to Rcpp Modules This is a talk I gave at the UseR! 2022 Conference. It covers the essentials on how to expose C&#43;&#43; classes to R using Rcpp Modules.
+Presentations: UseR!
+High-Resolution Peak Demand Estimation Using Generalized Additive Models and Deep Neural Networks, 2022, Jonathan Berrisch &amp; Michal Narajewski &amp; Florian Ziel This paper presents a method for estimating high-resolution electricity peak demand given lower resolution data.
+Paper: Pre-Print">
+<meta itemprop="datePublished" content="2021-05-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-05-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="384">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="Research" />
+<meta property="og:description" content="An Introduction to Rcpp Modules This is a talk I gave at the UseR! 2022 Conference. It covers the essentials on how to expose C&#43;&#43; classes to R using Rcpp Modules.
+Presentations: UseR!
+High-Resolution Peak Demand Estimation Using Generalized Additive Models and Deep Neural Networks, 2022, Jonathan Berrisch &amp; Michal Narajewski &amp; Florian Ziel This paper presents a method for estimating high-resolution electricity peak demand given lower resolution data.
+Paper: Pre-Print" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uee.berrisch.biz/slides/" />
+<meta property="article:published_time" content="2021-05-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-05-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Research"/>
+<meta name="twitter:description" content="An Introduction to Rcpp Modules This is a talk I gave at the UseR! 2022 Conference. It covers the essentials on how to expose C&#43;&#43; classes to R using Rcpp Modules.
+Presentations: UseR!
+High-Resolution Peak Demand Estimation Using Generalized Additive Models and Deep Neural Networks, 2022, Jonathan Berrisch &amp; Michal Narajewski &amp; Florian Ziel This paper presents a method for estimating high-resolution electricity peak demand given lower resolution data.
+Paper: Pre-Print"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Research</title>
+	<link rel="stylesheet" href="https://uee.berrisch.biz/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://uee.berrisch.biz">Umweltökonomik und Erneuerbare Energien</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://uee.berrisch.biz/tutorials">Übungen</a>
+				<a href="https://uee.berrisch.biz/slides">Slides</a>
+				<a href="https://uee.berrisch.biz/solutions">Lösungsvorschläge</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://orcid.org/0000-0002-4944-9074" target="_blank" rel="noopener me" title="Orcid"><svg role="img" width="24" height="24" viewBox="0 0 24 24" viewBox="0 0 24 24" fill="#ededed"
+    xmlns="http://www.w3.org/2000/svg">
+    <title>ORCID</title>
+    <path
+        d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z" />
+</svg></a><a href="https://github.com/BerriJ" target="_blank" rel="noopener me" title="Github"><svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="#ededed" xmlns="http://www.w3.org/2000/svg">
+    <title>GitHub</title>
+    <path
+        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+</svg></a><a href="https://stackoverflow.com/users/9551847/berrij" target="_blank" rel="noopener me" title="Stackoverflow"><svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="#ededed" xmlns="http://www.w3.org/2000/svg">
+    <title>Stack Overflow</title>
+    <path
+        d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z" />
+</svg></a><a href="mailto:jonathan@berrisch.biz" target="_blank" rel="noopener me" title="Email"><svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="#ededed" xmlns="http://www.w3.org/2000/svg">
+    <title>Mail</title>
+    <path
+        d="M15.61 12c0 1.99-1.62 3.61-3.61 3.61-1.99 0-3.61-1.62-3.61-3.61 0-1.99 1.62-3.61 3.61-3.61 1.99 0 3.61 1.62 3.61 3.61M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12c2.424 0 4.761-.722 6.76-2.087l.034-.024-1.617-1.879-.027.017A9.494 9.494 0 0 1 12 21.54c-5.26 0-9.54-4.28-9.54-9.54 0-5.26 4.28-9.54 9.54-9.54 5.26 0 9.54 4.28 9.54 9.54a9.63 9.63 0 0 1-.225 2.05c-.301 1.239-1.169 1.618-1.82 1.568-.654-.053-1.42-.52-1.426-1.661V12A6.076 6.076 0 0 0 12 5.93 6.076 6.076 0 0 0 5.93 12 6.076 6.076 0 0 0 12 18.07a6.02 6.02 0 0 0 4.3-1.792 3.9 3.9 0 0 0 3.32 1.805c.874 0 1.74-.292 2.437-.821.719-.547 1.256-1.336 1.553-2.285.047-.154.135-.504.135-.507l.002-.013c.175-.76.253-1.52.253-2.457 0-6.617-5.383-12-12-12" />
+</svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://uee.berrisch.biz/tutorials">Übungen</a></li>
+			<li><a href="https://uee.berrisch.biz/slides">Slides</a></li>
+			<li><a href="https://uee.berrisch.biz/solutions">Lösungsvorschläge</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>Research</h1>
+		<div class="content">
+			<h3 id="an-introduction-to-rcpp-modules">An Introduction to Rcpp Modules<a href="#an-introduction-to-rcpp-modules" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>This is a talk I gave at the UseR! 2022 Conference. It covers the essentials on how to expose C++ classes to R using Rcpp Modules.</p>
+<p>Presentations: <a href="../slides/22_06_useR">UseR!</a></p>
+<h3 id="high-resolution-peak-demand-estimation-using-generalized-additive-models-and-deep-neural-networks-2022-jonathan-berrisch--michal-narajewski--florian-ziel">High-Resolution Peak Demand Estimation Using Generalized Additive Models and Deep Neural Networks, 2022, Jonathan Berrisch &amp; Michal Narajewski &amp; Florian Ziel<a href="#high-resolution-peak-demand-estimation-using-generalized-additive-models-and-deep-neural-networks-2022-jonathan-berrisch--michal-narajewski--florian-ziel" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>This paper presents a method for estimating high-resolution electricity peak demand given lower resolution data.</p>
+<p>Paper: <a href="https://arxiv.org/abs/2203.03342">Pre-Print</a></p>
+<p>Presentations: <a href="../slides/22_05_brown_bag">Brown-Bag</a> | <a href="../slides/22_07_isf">2022 ISF</a></p>
+<h3 id="crps-learning-2021-jonathan-berrisch--florian-ziel-journal-of-econometrics">CRPS Learning, 2021, Jonathan Berrisch &amp; Florian Ziel, Journal of Econometrics<a href="#crps-learning-2021-jonathan-berrisch--florian-ziel-journal-of-econometrics" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>This paper treats how online learning algorithms can be used for the pointwise combination of probabilistic forecasts.</p>
+<p>Paper: <a href="https://doi.org/10.1016/j.jeconom.2021.11.008">Elsevier</a> | <a href="https://arxiv.org/abs/2102.00968">Pre-Print</a></p>
+<p>Presentations: <a href="../slides/21_05_france">2021 Causal Inference Group, France</a> | <a href="../slides/21_06_isf">2021 ISF</a> | <a href="../slides/21_11_epf">2021 EPF Group</a> | <a href="../slides/22_02_rgs">2022 15TH RGS Doctoral Conference</a> <a href="../slides/22_06_iccf">2022 ICCF</a></p>
+<h3 id="distributional-modeling-and-forecasting-of-natural-gas-prices-2021-jonathan-berrisch--florian-ziel">Distributional modeling and forecasting of natural gas prices, 2021, Jonathan Berrisch &amp; Florian Ziel<a href="#distributional-modeling-and-forecasting-of-natural-gas-prices-2021-jonathan-berrisch--florian-ziel" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>This paper presents price forecasting studies for two essential European natural-gas products.</p>
+<p>Paper: <a href="https://doi.org/10.1002/for.2853">Wiley</a> | <a href="https://arxiv.org/abs/2010.06227">Pre-Print</a></p>
+<h1 id="projects">Projects<a href="#projects" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h2 id="profoc---an-r-package-for-probabilistic-forecast-combination">profoc - An R Package for Probabilistic Forecast Combination<a href="#profoc---an-r-package-for-probabilistic-forecast-combination" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>This package implements methods which are proposed and discussed in <a href="https://arxiv.org/abs/2102.00968">CRPS Learning</a>.</p>
+<p><a href="https://cran.rstudio.com/web/packages/profoc/index.html">CRAN</a> | <a href="https://github.com/BerriJ/profoc">GitHub</a> | <a href="https://profoc.berrisch.biz/">Documentation</a></p>
+<h2 id="dccpp---an-r-package-for-fast-computation-of-the-distance-covariance-and-distance-correlation">dccpp - An R Package for fast computation of the distance covariance and distance correlation<a href="#dccpp---an-r-package-for-fast-computation-of-the-distance-covariance-and-distance-correlation" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>The computation cost is only O(n log(n)) for the distance correlation (see Chaudhuri, Hu, 2019, arXiv, elsevier). The functions are written entirely in C++ to speed up the computation.</p>
+<p><a href="https://cran.r-project.org/web/packages/dccpp/index.html">CRAN</a> | <a href="https://github.com/BerriJ/dccpp">GitHub</a> | <a href="https://dccpp.berrisch.biz/">Documentation</a></p>
+<h2 id="sstudentt---a-python-package-implementing-the-skewed-student-t-distribution">sstudentt - A python package implementing the skewed-student-t distribution<a href="#sstudentt---a-python-package-implementing-the-skewed-student-t-distribution" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>This package implements the skewed student-t distribution in python. Parameterized as described in Wurtz et. al (2006) [1]. An implementation in R is already existent [2].</p>
+<p><a href="https://pypi.org/project/sstudentt/">PyPi</a> | <a href="https://github.com/BerriJ/sstudentt/edit/master/README.rst">Github</a> | <a href="https://sstudentt.readthedocs.io/en/latest/">Documentation</a></p>
+<h1 id="development">Development<a href="#development" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>I develop most of my projects in a docker container that is publicly available for reuse and inspiration. This container makes it easy to reproduce results or develop projects like the profoc R package.</p>
+<p>The most convenient way to start is using VS-Code. You can find instructions in the <a href="https://github.com/BerriJ/devenv/tree/dev">GitHub Repo</a>. However, the bare-bone Docker Container is also available and sufficient.</p>
+<p>The Repository is available on <a href="https://github.com/BerriJ/devenv/tree/dev">GitHub</a>.</p>
+<p>The docker container is also available on <a href="https://github.com/users/BerriJ/packages/container/devenv/versions">GitHub</a></p>
+<h1 id="references">References<a href="#references" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>.. [1] Wurtz, Y. Chalabi, and L. Luksan. Parameter estimation of arma models with garch/aparch errors. an r and splus software implementation. Journal of Statistical Software, 2006.</p>
+<p>.. [2] R Implementation: <a href="https://www.gamlss.com/wp-content/uploads/2018/01/DistributionsForModellingLocationScaleandShape.pdf">https://www.gamlss.com/wp-content/uploads/2018/01/DistributionsForModellingLocationScaleandShape.pdf</a></p>
+
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2022 <a href="https://uee.berrisch.biz">Jonathan Berrisch</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://uee.berrisch.biz/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://uee.berrisch.biz/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
